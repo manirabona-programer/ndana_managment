@@ -45,14 +45,23 @@ RUN dos2unix /usr/local/bin/docker-php-entrypoint-dev.sh
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
 
+# Set working directory
+WORKDIR /var/www
+
 # copy application code
-WORKDIR /var/www/app
 COPY . .
 
 # install application dependencies
 COPY composer.json composer.json
 COPY composer.lock composer.lock
 RUN composer update -w --no-scripts --ansi --no-interaction
+RUN composer dump-autoload -o
+
+# Copy existing application directory permissions
+COPY --chown=www:www . /var/www
+
+# Change current user to www
+USER www
 
 RUN php artisan key:generate
 RUN chmod 777 -R storage
