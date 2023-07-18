@@ -39,11 +39,11 @@ RUN apt-get update && \
     apt-get install dos2unix && \
     apt-get clean
 
-COPY ./docker/docker-php-entrypoint /usr/local/bin/
-COPY ./docker/docker-php-entrypoint-dev /usr/local/bin/
+COPY ./docker/docker-php-entrypoint.sh /usr/local/bin/
+COPY ./docker/docker-php-entrypoint-dev.sh /usr/local/bin/
 
-RUN dos2unix /usr/local/bin/docker-php-entrypoint
-RUN dos2unix /usr/local/bin/docker-php-entrypoint-dev
+RUN dos2unix /usr/local/bin/docker-php-entrypoint.sh
+RUN dos2unix /usr/local/bin/docker-php-entrypoint-dev.sh
 
 # copy nginx configuration
 COPY ./docker/nginx.conf /etc/nginx/nginx.conf
