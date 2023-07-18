@@ -68,7 +68,6 @@ COPY --chown=www:www . /var/www
 USER www
 
 RUN chmod 777 -R storage
-RUN chmod 755 -R /var/www/storage/clockwork/index
 
 EXPOSE 8000
 
