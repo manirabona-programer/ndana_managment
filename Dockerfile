@@ -25,15 +25,16 @@ ENV FPM_PM_MAX_CHILDREN=20 \
     FPM_PM_MAX_SPARE_SERVERS=3
 
 # set application environment variables
-ENV APP_NAME="Question Board" \
+ENV APP_NAME="Ndana_Shop_Management" \
     APP_ENV=production \
     APP_DEBUG=false
 
-# copy entrypoint files
+# install dos2unix
 RUN apt-get update && \
     apt-get install dos2unix && \
     apt-get clean
 
+# copy entrypoint files
 COPY ./docker/docker-php-entrypoint.sh /usr/local/bin/
 COPY ./docker/docker-php-entrypoint-dev.sh /usr/local/bin/
 
@@ -49,14 +50,18 @@ WORKDIR /var/www/app
 COPY . .
 
 # install application dependencies
-COPY ./composer.json ./composer.lock* ./
-RUN composer update -w --no-scripts --ansi --no-interaction --ignore-platform-reqs
+COPY composer.json composer.json
+COPY composer.lock composer.lock
+RUN composer update -w --no-scripts --ansi --no-interaction
 
 RUN composer dump-autoload -o --ignore-platform-reqs \
     && chown -R :www-data /var/www/app \
     && chmod -R 775 /var/www/app/storage /var/www/app/bootstrap/cache
 
-EXPOSE 80
+RUN php artisan key:generate
+RUN chmod 777 -R storage
+
+EXPOSE 8000
 
 # run supervisor
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
