@@ -54,10 +54,6 @@ COPY composer.json composer.json
 COPY composer.lock composer.lock
 RUN composer update -w --no-scripts --ansi --no-interaction
 
-RUN composer dump-autoload -o \
-    && chown -R :www-data /var/www/app \
-    && chmod -R 775 /var/www/app/storage /var/www/app/bootstrap/cache
-
 RUN php artisan key:generate
 RUN chmod 777 -R storage
 
