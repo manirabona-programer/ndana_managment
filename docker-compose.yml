@@ -63,5 +63,28 @@ services:
           - ./node_modules:/usr/src/node_modules
         tty: true
 
+    # App Service
+    app:
+        build: .
+        entrypoint: /usr/local/bin/docker-php-entrypoint-dev
+        command: ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
+        volumes:
+            - ./src:/var/www/app
+        environment:
+            - APP_ENV=local
+            - APP_KEY=base64:tLmYfUrrZITzLIkSjFnV+PCAFxkdU+duUxjVSIlrrHo=
+            - APP_DEBUG=true
+            - DB_CONNECTION=mysql
+            - DB_HOST=database ## same as the database service name
+            - DB_PORT=3306
+            - DB_DATABASE=ndana_db
+            - DB_USERNAME=root
+            - DB_PASSWORD=root
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        depends_on:
+            - database
+
 volumes:
     db-data: ~
