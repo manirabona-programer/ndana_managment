@@ -140,11 +140,11 @@ services:
         image: node:13.7
         container_name: npm
         volumes:
-        - ./src:/var/www/html
+            - ./src:/var/www/html
         working_dir: /var/www/html
         entrypoint: ['npm']
         networks:
-        - laravel
+            - laravel
 
     phpunit:
         build:
@@ -157,6 +157,6 @@ services:
         entrypoint: ["/var/www/html/vendor/bin/phpunit"]
         networks:
             - laravel
-            
+
 volumes:
     db-data: ~
