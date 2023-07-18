@@ -67,7 +67,6 @@ COPY --chown=www:www . /var/www
 # Change current user to www
 USER www
 
-RUN php artisan key:generate
 RUN chmod 777 -R storage
 RUN chmod 755 -R /var/www/storage/clockwork/index
 
