@@ -69,7 +69,7 @@ services:
         entrypoint: /usr/local/bin/docker-php-entrypoint-dev
         command: ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
         volumes:
-            - ./src:/var/www/app
+            - ./:/var/www/app
         environment:
             - APP_ENV=local
             - APP_KEY=base64:tLmYfUrrZITzLIkSjFnV+PCAFxkdU+duUxjVSIlrrHo=
