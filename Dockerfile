@@ -67,8 +67,6 @@ COPY --chown=www:www . /var/www
 # Change current user to www
 USER www
 
-RUN chmod 777 -R storage
-
 EXPOSE 8000
 
 # run supervisor
