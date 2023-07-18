@@ -7,9 +7,16 @@
     "require": {
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
+        "inertiajs/inertia-laravel": "^0.6.8",
+        "itsgoingd/clockwork": "^5.1",
         "laravel/framework": "^9.19",
+        "laravel/jetstream": "^3.0",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/telescope": "^4.15",
+        "laravel/tinker": "^2.7",
+        "mll-lab/laravel-graphiql": "^3.1",
+        "nuwave/lighthouse": "^6.14",
+        "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
