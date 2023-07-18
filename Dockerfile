@@ -50,7 +50,7 @@ COPY . .
 
 # install application dependencies
 COPY ./composer.json ./composer.lock* ./
-RUN composer update -w --no-scripts --no-autoloader --ansi --no-interaction --ignore-platform-reqs
+RUN composer update -w --no-scripts --ansi --no-interaction --ignore-platform-reqs
 
 RUN composer dump-autoload -o --ignore-platform-reqs \
     && chown -R :www-data /var/www/app \
