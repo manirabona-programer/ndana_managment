@@ -1,5 +1,27 @@
 version: "3.8"
+
+networks:
+  laravel:
+    name: laravel
+
 services:
+
+    # Nginx Service
+    nginx:
+        build:
+            context: .
+            dockerfile: nginx.dockerfile
+        container_name: nginx
+        depends_on:
+            - php
+            - database
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - ./src:/var/www/html
+        networks:
+            - laravel
 
     # PHP service
     php:
@@ -8,21 +30,25 @@ services:
             target: php
             args:
                 - APP_ENV=${APP_ENV}
+        container_name: php
         environment:
             - APP_ENV=${APP_ENV}
             - CONTAINER_ROLE=app
         working_dir: /var/www
         volumes:
-          - ./:/var/www
+          - ./src:/var/www/html
         ports:
           - 8000:8000
         depends_on:
             - database
             - redis
+        networks:
+            - laravel
 
     # Database service
     database:
         image: mysql:8.0
+        container_name: database
         ports:
           - 3306:3306
         environment:
@@ -30,7 +56,9 @@ services:
             - MYSQL_USERNAME=${DB_USERNAME}
             - MYSQL_PASSWORD=${DB_PASSWORD}
         volumes:
-          - db-data:/var/lib/mysql
+            - ./mysql:/var/lib/mysql
+        networks:
+            - laravel
 
     # Redis Service
     redis:
@@ -86,5 +114,49 @@ services:
         depends_on:
             - database
 
+    # Composer service
+    composer:
+        image: composer:latest
+        container_name: composer
+        volumes:
+            - ./src:/var/www/html
+        working_dir: /var/www/html
+        networks:
+            - laravel
+
+    artisan:
+        build:
+            context: .
+            dockerfile: php.dockerfile
+        container_name: artisan
+        volumes:
+            - ./src:/var/www/html
+        working_dir: /var/www/html
+        entrypoint: ["php", "artisan"]
+        networks:
+            - laravel
+
+    npm:
+        image: node:13.7
+        container_name: npm
+        volumes:
+        - ./src:/var/www/html
+        working_dir: /var/www/html
+        entrypoint: ['npm']
+        networks:
+        - laravel
+
+    phpunit:
+        build:
+            context: .
+            dockerfile: php.dockerfile
+        container_name: phpunit
+        volumes:
+            - ./src:/var/www/html
+        working_dir: /var/www/html
+        entrypoint: ["/var/www/html/vendor/bin/phpunit"]
+        networks:
+            - laravel
+            
 volumes:
     db-data: ~
