@@ -21,7 +21,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # install application dependencies
 WORKDIR /var/www/app
 COPY ./composer.json ./composer.lock* ./
-RUN composer update --no-scripts --no-autoloader --ansi --no-interaction --ignore-platform-reqs
+RUN composer update -w --no-scripts --no-autoloader --ansi --no-interaction --ignore-platform-reqs
 
 # add custom php-fpm pool settings, these get written at entrypoint startup
 ENV FPM_PM_MAX_CHILDREN=20 \
