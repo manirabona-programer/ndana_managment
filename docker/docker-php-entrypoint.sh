@@ -4,7 +4,7 @@ set -e
 # If composer already autoloade
 # then skip this process
 if [ ! -f vendor/autoload.php ]; then
-    composer install -no-progress --no-interaction
+    composer update -no-progress --no-interaction
 fi
 
 # If user forgot to create env file then
