@@ -18,11 +18,6 @@ RUN pecl install -o -f redis \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && composer --ansi --version --no-interaction
 
-# install application dependencies
-WORKDIR /var/www/app
-COPY ./composer.json ./composer.lock* ./
-RUN composer update -w --no-scripts --no-autoloader --ansi --no-interaction --ignore-platform-reqs
-
 # add custom php-fpm pool settings, these get written at entrypoint startup
 ENV FPM_PM_MAX_CHILDREN=20 \
     FPM_PM_START_SERVERS=2 \
@@ -52,6 +47,11 @@ COPY ./docker/default.conf /etc/nginx/conf.d/default.conf
 # copy application code
 WORKDIR /var/www/app
 COPY . .
+
+# install application dependencies
+COPY ./composer.json ./composer.lock* ./
+RUN composer update -w --no-scripts --no-autoloader --ansi --no-interaction --ignore-platform-reqs
+
 RUN composer dump-autoload -o --ignore-platform-reqs \
     && chown -R :www-data /var/www/app \
     && chmod -R 775 /var/www/app/storage /var/www/app/bootstrap/cache
