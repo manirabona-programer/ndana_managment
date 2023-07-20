@@ -7,27 +7,15 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      bb: web
+      app: ndana_shop_manager
   template:
     metadata:
       labels:
-        bb: web
+        app: ndana_shop_manager
     spec:
       containers:
-      - name: ndana_shop_manager
+      - name: ndana-shop-deployment
         image: patienceman/ndana_shop_manager:latest
         imagePullPolicy: Never
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ndana_shop_manager
-  namespace: default
-spec:
-  type: NodePort
-  selector:
-    bb: web
-  ports:
-  - port: 3000
-    targetPort: 3000
-    nodePort: 30001
+        ports:
+        - containerPort: 3000

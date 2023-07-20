@@ -1,0 +1,40 @@
+features:
+    1. Products
+        - Name
+        - Image
+        - Category
+        - Color
+        - Type
+        - Investor_id
+        - Description
+        - Active_status
+        - Meta_desc
+    2. Imports
+        - Product_id
+        - Quantity
+        - Imported_at
+    3. Exports
+        - Product_id
+        - Quantity
+        - Payment_method
+        - Exported_at
+    5. Expences
+        - Description
+        - Cost
+        - Payment_method
+    6. Investors
+        - Name
+        - Email
+        - Phone_number
+    7. Purchases
+        - Product_id
+        - Price
+        - Final_price
+        - Discount
+
+product_type:
+    - Shoes
+    - Others
+Meta_descs:
+    - Magazine
+    - Bodaboda
