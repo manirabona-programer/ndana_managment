@@ -96,7 +96,9 @@ const closeModal = () => {
                         Delete Account
                     </DangerButton>
                 </template>
+
             </DialogModal>
+
         </template>
     </ActionSection>
 </template>

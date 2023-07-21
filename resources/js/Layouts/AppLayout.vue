@@ -51,6 +51,21 @@ const logout = () => {
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
+                                <NavLink :href="route('products')" :active="route().current('products')">
+                                    Products
+                                </NavLink>
+                                <NavLink :href="route('imports')" :active="route().current('imports')">
+                                    Imports
+                                </NavLink>
+                                <NavLink :href="route('exports')" :active="route().current('exports')">
+                                    Exports
+                                </NavLink>
+                                <NavLink :href="route('expences')" :active="route().current('expences')">
+                                    Expences
+                                </NavLink>
+                                <NavLink :href="route('investors')" :active="route().current('investors')">
+                                    Investors
+                                </NavLink>
                             </div>
                         </div>
 
@@ -193,6 +208,21 @@ const logout = () => {
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('products')" :active="route().current('products')">
+                            Products
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('imports')" :active="route().current('imports')">
+                            Imports
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('exports')" :active="route().current('exports')">
+                            Exports
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('expences')" :active="route().current('expences')">
+                            Expences
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('investors')" :active="route().current('investors')">
+                            Investors
                         </ResponsiveNavLink>
                     </div>
 
