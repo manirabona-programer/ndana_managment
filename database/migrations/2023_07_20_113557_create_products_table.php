@@ -21,6 +21,8 @@
                 $table->string('meta_desc');
                 $table->string('color');
                 $table->longText('description');
+                $table->string('quantity');
+                $table->string('price');
                 $table->boolean('active_status')->default(true);
                 $table->timestamps();
             });

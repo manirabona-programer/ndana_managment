@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
                 'meta_desc' => "Magazine",
                 'color' => $this->faker->colorName,
                 'description' => $this->faker->text,
+                'quantity' => "20",
+                'price' => "10000",
             ];
         }
     }

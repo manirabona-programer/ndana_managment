@@ -17,5 +17,6 @@
             'name',
             'email',
             'phone_number',
+            'active_status'
         ];
     }

@@ -1,5 +1,14 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import moment from "moment";
+
+const imports = ref([]);
+
+onMounted(async () => {
+    let response = await axios.get('/api/imports');
+    imports.value = response.data;
+});
 </script>
 
 <template>
@@ -43,144 +52,39 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
                             </tr>
                         </thead>
                         <tbody class="text-sm divide-y divide-gray-500 mt-4">
-                            <tr>
+                            <tr v-for="product in imports">
                                 <td class="p-2 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg" width="40" height="40" alt="Alex Shatov"></div>
-                                        <div class="font-bold text-gray-800 dark:text-gray-100">Air Jordan 4</div>
+                                        <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full w-40 h-10" :src="product.product.image" width="40" height="40" :alt="product.product.name"></div>
+                                        <div class="font-bold text-gray-800 dark:text-gray-100">{{ product.product.name }}</div>
                                     </div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Category</div>
+                                    <div class="text-left text-gray-800 dark:text-gray-100">{{ product.product.category }}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Red color</div>
+                                    <div class="text-left text-gray-800 dark:text-gray-100">{{ product.product.color }}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Women Shoew</div>
+                                    <div class="text-left text-gray-800 dark:text-gray-100">{{ product.product.type }}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Kwizera Bertin</div>
+                                    <div class="text-left text-gray-800 dark:text-gray-100">{{ product.product.investor_id }}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Something desc...</div>
+                                    <div class="text-left text-gray-800 dark:text-gray-100 line-clamp-1 w-10">{{ product.product.description }}...</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Magazine</div>
+                                    <div class="text-left text-gray-800 dark:text-gray-100">{{ product.product.meta_desc }}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">10</div>
+                                    <div class="text-left text-gray-800 dark:text-gray-100">{{ product.product.quantity }}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-bold text-green-500">$2,890.66</div>
+                                    <div class="text-left font-bold text-green-500">RWF {{ parseInt(product.product.price).toLocaleString() }}</div>
                                 </td>
                                 <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">12th jul 2023</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg" width="40" height="40" alt="Alex Shatov"></div>
-                                        <div class="font-bold text-gray-800 dark:text-gray-100">Air Jordan 4</div>
-                                    </div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Category</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Red color</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Women Shoew</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Kwizera Bertin</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Something desc...</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Magazine</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">10</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-bold text-green-500">$2,890.66</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">12th jul 2023</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg" width="40" height="40" alt="Alex Shatov"></div>
-                                        <div class="font-bold text-gray-800 dark:text-gray-100">Air Jordan 4</div>
-                                    </div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Category</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Red color</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Women Shoew</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Kwizera Bertin</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Something desc...</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Magazine</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">10</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-bold text-green-500">$2,890.66</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">12th jul 2023</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="https://raw.githubusercontent.com/cruip/vuejs-admin-dashboard-template/main/src/images/user-36-05.jpg" width="40" height="40" alt="Alex Shatov"></div>
-                                        <div class="font-bold text-gray-800 dark:text-gray-100">Air Jordan 4</div>
-                                    </div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Category</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Red color</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Women Shoew</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Kwizera Bertin</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Something desc...</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">Magazine</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">10</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left font-bold text-green-500">$2,890.66</div>
-                                </td>
-                                <td class="p-2 whitespace-nowrap">
-                                    <div class="text-left text-gray-800 dark:text-gray-100">12th jul 2023</div>
+                                    <div class="text-left text-gray-800 dark:text-gray-100">{{ moment(product.product.created_at).format("ddd, MMM Y h:m A") }}</div>
                                 </td>
                             </tr>
                         </tbody>

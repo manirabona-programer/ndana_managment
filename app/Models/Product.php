@@ -22,7 +22,9 @@
             'meta_desc',
             'color',
             'description',
-            'active_status'
+            'active_status',
+            'quantity',
+            'price'
         ];
 
         /**
