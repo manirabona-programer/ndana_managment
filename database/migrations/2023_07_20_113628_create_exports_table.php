@@ -15,6 +15,7 @@
                 $table->id();
                 $table->unsignedBigInteger('product_id');
                 $table->string('quantity');
+                $table->string('price');
                 $table->string('payment_method');
                 $table->timestamp('exported_at')->nullable()->default(now());
                 $table->timestamps();

@@ -4,6 +4,7 @@
 
     use App\Http\Controllers\Controller;
     use App\Http\Requests\StoreInvestor;
+    use App\Http\Resources\InvestorResource;
     use App\Models\Investor;
 
     class InvestorController extends Controller {
@@ -13,8 +14,8 @@
          * @return \Illuminate\Http\Response
          */
         public function index() {
-            $investors = Investor::all();
-            return response()->json($investors);
+            $investors = Investor::orderBy('created_at', 'desc')->get();
+            return response()->json(InvestorResource::collection($investors));
         }
 
         /**

@@ -16,6 +16,7 @@
         protected $fillable = [
             'product_id',
             'quantity',
+            'price',
             'payment_method',
             'exported_at',
         ];

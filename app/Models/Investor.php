@@ -19,4 +19,8 @@
             'phone_number',
             'active_status'
         ];
+
+        public function products() {
+            return $this->hasMany(Product::class);
+        }
     }
