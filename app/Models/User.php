@@ -10,8 +10,10 @@
     use Laravel\Jetstream\HasProfilePhoto;
     use Laravel\Jetstream\HasTeams;
     use Laravel\Passport\HasApiTokens;
+    use Laratrust\Traits\LaratrustUserTrait;
 
     class User extends Authenticatable {
+        use LaratrustUserTrait;
         use HasApiTokens;
         use HasFactory;
         use HasProfilePhoto;

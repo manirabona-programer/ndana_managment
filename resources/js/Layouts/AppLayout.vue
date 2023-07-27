@@ -10,6 +10,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 defineProps({
     title: String,
+    canView: Boolean
 });
 
 const showingNavigationDropdown = ref(false);
@@ -60,10 +61,10 @@ const logout = () => {
                                 <NavLink :href="route('exports')" :active="route().current('exports')">
                                     Exports
                                 </NavLink>
-                                <NavLink :href="route('expences')" :active="route().current('expences')">
+                                <NavLink v-if="canView" :href="route('expences')" :active="route().current('expences')">
                                     Expences
                                 </NavLink>
-                                <NavLink :href="route('investors')" :active="route().current('investors')">
+                                <NavLink v-if="canView" :href="route('investors')" :active="route().current('investors')">
                                     Investors
                                 </NavLink>
                             </div>
@@ -72,7 +73,7 @@ const logout = () => {
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <div class="ml-3 relative">
                                 <!-- Teams Dropdown -->
-                                <Dropdown v-if="$page.props.jetstream.hasTeamFeatures" align="right" width="60">
+                                <Dropdown v-if="$page.props.jetstream.hasTeamFeatures && canView" align="right" width="60">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
                                             <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150">
@@ -94,12 +95,8 @@ const logout = () => {
                                                 </div>
 
                                                 <!-- Team Settings -->
-                                                <DropdownLink :href="route('teams.show', $page.props.auth.user.current_team)">
+                                                <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.show', $page.props.auth.user.current_team)">
                                                     Team Settings
-                                                </DropdownLink>
-
-                                                <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.create')">
-                                                    Create New Team
                                                 </DropdownLink>
 
                                                 <div class="border-t border-gray-200 dark:border-gray-600" />
@@ -218,10 +215,10 @@ const logout = () => {
                         <ResponsiveNavLink :href="route('exports')" :active="route().current('exports')">
                             Exports
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('expences')" :active="route().current('expences')">
+                        <ResponsiveNavLink v-if="canView" :href="route('expences')" :active="route().current('expences')">
                             Expences
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('investors')" :active="route().current('investors')">
+                        <ResponsiveNavLink v-if="canView" :href="route('investors')" :active="route().current('investors')">
                             Investors
                         </ResponsiveNavLink>
                     </div>
@@ -260,7 +257,7 @@ const logout = () => {
                             </form>
 
                             <!-- Team Management -->
-                            <template v-if="$page.props.jetstream.hasTeamFeatures">
+                            <template v-if="$page.props.jetstream.hasTeamFeatures && canView">
                                 <div class="border-t border-gray-200 dark:border-gray-600" />
 
                                 <div class="block px-4 py-2 text-xs text-gray-400">

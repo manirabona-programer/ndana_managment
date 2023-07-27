@@ -1,7 +1,8 @@
 <?php
 
     use Illuminate\Foundation\Application;
-    use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
     use Inertia\Inertia;
 
     /*
@@ -18,17 +19,18 @@
     Route::get('/', function () {
         return Inertia::render('Welcome', [
             'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
+            'canRegister' => false,
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
         ]);
     });
 
+
     Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
-        Route::get('/dashboard', function () { return Inertia::render('Dashboard'); })->name('dashboard');
-        Route::get('/products', function () { return Inertia::render('Product/Products'); })->name('products');
-        Route::get('/imports', function () { return Inertia::render('Imports'); })->name('imports');
-        Route::get('/exports', function () { return Inertia::render('Exports/Exports'); })->name('exports');
-        Route::get('/expences', function () { return Inertia::render('Expences/Expences'); })->name('expences');
-        Route::get('/investors', function () { return Inertia::render('Investors/Investors'); })->name('investors');
+        Route::get('/dashboard', function () { return Inertia::render('Dashboard', ['canView' => Auth::user()->hasRole('superadministrator')]); })->name('dashboard');
+        Route::get('/products', function () { return Inertia::render('Product/Products', ['canView' => Auth::user()->hasRole('superadministrator')]); })->name('products');
+        Route::get('/imports', function () { return Inertia::render('Imports', ['canView' => Auth::user()->hasRole('superadministrator')]); })->name('imports');
+        Route::get('/exports', function () { return Inertia::render('Exports/Exports', ['canView' => Auth::user()->hasRole('superadministrator')]); })->name('exports');
+        Route::get('/expences', function () { return Inertia::render('Expences/Expences', ['canView' => Auth::user()->hasRole('superadministrator')]); })->name('expences');
+        Route::get('/investors', function () { return Inertia::render('Investors/Investors', ['canView' => Auth::user()->hasRole('superadministrator')]); })->name('investors');
     });

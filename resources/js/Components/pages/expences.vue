@@ -107,6 +107,9 @@ onMounted(async () => {
 
 <template>
     <div>
+        <div v-if="processing" class="absolute top-0 right-0 left-0 bottom-0 w-full h-full z-10 bg-gray-900/80 flex items-center justify-center">
+            <div class="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400"></div>
+        </div>
 
         <!-- Edit product -->
         <DialogModal :show="editMode" @close="closeEditMode">

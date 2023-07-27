@@ -9,6 +9,9 @@ destroy:
 build:
 	docker-compose up --detach --build
 seed:
- 	docker-compose exec app php artisan db:seed
+	docker-compose exec app php artisan db:seed
 migrate:
 	docker-compose exec app php artisan migrate:fresh
+
+laratrust:
+	php artisan db:seed --class=LaratrustSeeder

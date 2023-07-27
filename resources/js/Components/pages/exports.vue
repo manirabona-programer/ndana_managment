@@ -4,11 +4,14 @@ import { onMounted, ref } from 'vue';
 import moment from "moment";
 
 const productExports = ref([]);
+const processing = ref(false);
 
 const getExports = async () => {
     productExports.value = [];
+    processing.value = true;
     let response = await axios.get('/api/exports');
     productExports.value = response.data;
+    processing.value = false;
 }
 
 onMounted(async () => await getExports());
@@ -19,6 +22,10 @@ onMounted(async () => await getExports());
         <div class="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent">
             <div class="p-3">
                 <div class="overflow-x-auto">
+                    <div v-if="processing" class="absolute top-0 right-0 left-0 bottom-0 w-full h-full z-10 bg-gray-900/80 flex items-center justify-center">
+                        <div class="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400"></div>
+                    </div>
+
                     <table class="table-auto w-full">
                         <thead class="text-xs font-semibold uppercase text-gray-400 dark:text-gray-50">
                             <tr>

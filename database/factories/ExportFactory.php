@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
                 'product_id' => Product::all()->random()->id,
                 'quantity' => "5",
                 'payment_method' => "CASH",
+                'price' => "1000",
             ];
         }
     }

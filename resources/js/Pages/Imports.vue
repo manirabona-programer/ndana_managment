@@ -1,11 +1,14 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Imports from '@/Components/pages/imports.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+
+defineProps({
+    canView: Boolean
+});
 </script>
 
 <template>
-    <AppLayout title="Imports">
+    <AppLayout title="Imports" :canView="canView">
         <template #header>
             <div class="flex items-center justify-between">
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
