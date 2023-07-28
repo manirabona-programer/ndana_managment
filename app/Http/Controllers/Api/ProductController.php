@@ -6,6 +6,7 @@
     use App\Http\Requests\StoreProduct;
     use App\Http\Resources\ProductResource;
     use App\Models\Product;
+    use App\QueryFilters\ProductFilter;
     use App\Traits\FileStorage;
 
     class ProductController extends Controller {
@@ -16,8 +17,8 @@
          *
          * @return \Illuminate\Http\Response
          */
-        public function index() {
-            $products = Product::where('active_status', true)->with(['investor'])->orderBy('created_at', 'desc')->get();
+        public function index(ProductFilter $filters) {
+            $products = Product::where('active_status', true)->filter($filters)->with(['investor'])->orderBy('created_at', 'desc')->get();
             return response()->json(ProductResource::collection($products));
         }
 

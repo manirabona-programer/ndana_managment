@@ -1,8 +1,8 @@
 <?php
 
     use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\Route;
     use Inertia\Inertia;
 
     /*
@@ -17,9 +17,27 @@ use Illuminate\Support\Facades\Route;
     */
 
     Route::get('/', function () {
-        return Inertia::render('Welcome', [
+        return Inertia::render('Auth/Login', [
             'canLogin' => Route::has('login'),
             'canRegister' => false,
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+        ]);
+    });
+
+    Route::get('/register', function () {
+        return Inertia::render('Auth/Login', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => false,
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+        ]);
+    });
+
+    Route::get('/geek/register', function () {
+        return Inertia::render('Auth/Register', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => true,
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
         ]);

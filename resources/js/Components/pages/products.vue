@@ -152,6 +152,14 @@ const updatePhotoPreview = () => {
     reader.readAsDataURL(photo);
 };
 
+const searchProducts = async (value) => {
+    processing.value = true;
+    let response = await axios.get(`/api/products?query=${value}`);
+    products.value = [];
+    products.value = response.data;
+    processing.value = false;
+}
+
 onMounted(async () => {
     await getProducts()
     await getInvestors()
@@ -161,12 +169,30 @@ onMounted(async () => {
 
 <template>
     <div class="relative min-h-[50vh]">
-        <div v-if="processing" class="absolute top-0 right-0 left-0 bottom-0 w-full h-full z-10 bg-gray-900/80 flex items-center justify-center">
+        <div v-if="processing" class="absolute top-0 right-0 left-0 bottom-0 w-full h-full z-30 bg-gray-900/80 flex items-center justify-center">
             <div class="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-violet-400"></div>
         </div>
 
-         <!-- Edit product -->
-         <DialogModal :show="editMode" @close="closeEditMode">
+        <div class='my-10 mx-8'>
+            <div class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white dark:bg-gray-700 overflow-hidden">
+                <div class="grid place-items-center h-full w-12 text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </div>
+
+                <input
+                    class="peer h-full w-full outline-none border-none text-sm text-gray-700 pr-2 dark:bg-gray-700 dark:text-gray-100"
+                    type="text"
+                    id="search"
+                    @keypress.enter="searchProducts($event.target.value)"
+                    placeholder="Search something.."
+                />
+            </div>
+        </div>
+
+        <!-- Edit product -->
+        <DialogModal :show="editMode" @close="closeEditMode">
             <template #title>
                 Update {{ toBeEditedProduct.name }}
             </template>

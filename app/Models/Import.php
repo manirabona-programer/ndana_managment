@@ -4,9 +4,10 @@
 
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Model;
+    use Patienceman\Filtan\Filterable;
 
     class Import extends Model {
-        use HasFactory;
+        use HasFactory, Filterable;
 
         /**
          * The attributes that are mass assignable.
