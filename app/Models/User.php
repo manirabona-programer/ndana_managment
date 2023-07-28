@@ -13,7 +13,9 @@
     use Laratrust\Traits\LaratrustUserTrait;
 
     class User extends Authenticatable {
-        use LaratrustUserTrait;
+        use LaratrustUserTrait {
+            LaratrustUserTrait::allTeams insteadof HasTeams;
+        }
         use HasApiTokens;
         use HasFactory;
         use HasProfilePhoto;
