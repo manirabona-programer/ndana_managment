@@ -135,8 +135,8 @@ const switchToTeam = (team) => {
  .nav--icons {
    position: absolute;
    bottom: 1.2em;
-   left: 1em;
-   right: 1em;
+   left: 0em;
+   right: 0em;
  }
  .nav--icons ul {
    list-style-type: none;
