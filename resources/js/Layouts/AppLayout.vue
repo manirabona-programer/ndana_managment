@@ -93,12 +93,7 @@ const logout = () => {
                                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                                     Manage Team
                                                 </div>
-
-                                                <!-- Team Settings -->
-                                                <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.show', {team: $page.props.auth.user.current_team})">
-                                                    Team Settings
-                                                </DropdownLink>
-
+                                                
                                                 <div class="border-t border-gray-200 dark:border-gray-600" />
 
                                                 <!-- Team Switcher -->
@@ -263,11 +258,6 @@ const logout = () => {
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     Manage Team
                                 </div>
-
-                                <!-- Team Settings -->
-                                <ResponsiveNavLink :href="route('teams.show', {team: $page.props.auth.user.current_team})" :active="route().current('teams.show')">
-                                    Team Settings
-                                </ResponsiveNavLink>
 
                                 <ResponsiveNavLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.create')" :active="route().current('teams.create')">
                                     Create New Team
