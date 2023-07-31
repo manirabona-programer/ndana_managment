@@ -95,7 +95,7 @@ const logout = () => {
                                                 </div>
 
                                                 <!-- Team Settings -->
-                                                <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.show', $page.props.auth.user.current_team)">
+                                                <DropdownLink v-if="$page.props.jetstream.canCreateTeams" :href="route('teams.show', {team: $page.props.auth.user.current_team})">
                                                     Team Settings
                                                 </DropdownLink>
 
@@ -265,7 +265,7 @@ const logout = () => {
                                 </div>
 
                                 <!-- Team Settings -->
-                                <ResponsiveNavLink :href="route('teams.show', $page.props.auth.user.current_team)" :active="route().current('teams.show')">
+                                <ResponsiveNavLink :href="route('teams.show', {team: $page.props.auth.user.current_team})" :active="route().current('teams.show')">
                                     Team Settings
                                 </ResponsiveNavLink>
 

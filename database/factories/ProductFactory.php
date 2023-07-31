@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
             return [
                 'investor_id' => Investor::all()->random()->id,
                 'name' => $this->faker->domainName,
-                'image' => $this->faker->imageUrl,
+                'image' => "https://source.unsplash.com/random/200x200?sig=3&shoes",
                 'type' => "Men",
                 'category' => "shoes",
                 'meta_desc' => "Magazine",
