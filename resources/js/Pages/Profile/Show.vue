@@ -11,6 +11,10 @@ defineProps({
     confirmsTwoFactorAuthentication: Boolean,
     sessions: Array,
 });
+
+const logout = () => {
+    router.post(route('logout'));
+};
 </script>
 
 <template>
@@ -19,6 +23,11 @@ defineProps({
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 Profile
             </h2>
+            <form @submit="logout">
+                <button type="button">
+                    Log Out
+                </button>
+            </form>
         </template>
 
         <div>
@@ -40,7 +49,6 @@ defineProps({
                         :requires-confirmation="confirmsTwoFactorAuthentication"
                         class="mt-10 sm:mt-0"
                     />
-
                     <SectionBorder />
                 </div>
 
