@@ -4,7 +4,7 @@
 
     use Illuminate\Http\Resources\Json\JsonResource;
 
-    class ProductResource extends JsonResource {
+    class ExportResource extends JsonResource {
         /**
          * Transform the resource into an array.
          *
@@ -14,16 +14,11 @@
         public function toArray($request) {
             return [
                 'id' => $this->id,
-                'name' => $this->name,
-                'image' => env('APP_URL')."/storage/".$this->image,
-                'type' => $this->type,
-                'investor' => $this->investor,
-                'category' => $this->category,
-                'meta_desc' => $this->meta_desc,
-                'color' => $this->color,
-                'description' => $this->description,
+                'product' => ProductResource::make($this->product),
                 'quantity' => $this->quantity,
                 'price' => $this->price,
+                'payment_method' => $this->payment_method,
+                'exported_at' => $this->exported_at,
                 'created_at' => $this->created_at->toDateTimeString(),
             ];
         }

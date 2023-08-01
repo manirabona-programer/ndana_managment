@@ -4,7 +4,8 @@
 
     use App\Http\Controllers\Controller;
     use App\Http\Requests\ExportProductRequest;
-    use App\Models\Export;
+use App\Http\Resources\ExportResource;
+use App\Models\Export;
     use App\Models\Product;
 
     class ExportController extends Controller {
@@ -15,7 +16,7 @@
          */
         public function index() {
             $exports = Export::with(['product'])->orderBy('created_at', 'desc')->get();
-            return response()->json($exports);
+            return response()->json(ExportResource::collection($exports));
         }
 
         /**
