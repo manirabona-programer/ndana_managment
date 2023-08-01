@@ -131,6 +131,7 @@ const switchToTeam = (team) => {
    width: 100%;
    height: 80px;
    border-radius: 10px;
+   overflow: auto;
  }
  .nav--icons {
    position: absolute;

@@ -111,8 +111,6 @@ onMounted(async () => {
         </template>
 
         <template #content>
-            Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.
-
             <div class="mt-4">
                 <div class="mb-4">
                     <InputLabel for="Product Name" value="Product Name" />
